@@ -1,0 +1,2 @@
+# Ignore crazily large folder of node modules
+node_modules
