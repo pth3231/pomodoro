@@ -1,3 +1,5 @@
-p {
-    color: red;
+@import "tailwindcss";
+
+@theme {
+    --font-mono: "Google Sans Code", monospace;
 }
