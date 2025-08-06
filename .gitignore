@@ -1,5 +1,6 @@
 node_modules/
 build/
+dist/
 coverage/
 
 logs
@@ -10,6 +11,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 .env
+.env.development
 .env.development.local
 .env.test.local
 .env.production.local

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <title>Home - Pomodoro Manager</title>
+    <link rel="stylesheet" href="/output.css">
+    <link rel="icon" type="image/svg" href="/icon.svg">
+    <script src="/index.js" defer></script>
+</head>
+<body class="w-screen min-h-screen overflow-hidden bg-cover bg-center bg-[url(/bg-dark-academia.jpg)] text-slate-50 flex flex-col justify-between items-stretch">
+    <nav class="w-full mx-auto justify-between items-center">
+        <div class="container mx-auto flex items-center justify-between py-2 px-4">
+            <a href="/" class="flex items-center">
+                <img src="/icon.svg" class="h-16 w-16" />
+                <span class="font-bold ml-4">pomodoro</span>
+            </a>
+            <a href="/login" class="hover:underline">Login</a>
+        </div>
+    </nav>
+    <div class="container mx-auto flex flex-col items-center justify-center">
+        <h1 
+            class="text-9xl font-bold text-slate-50 py-8 items-center rounded-full"
+            id="timer"
+        >
+            ~_~
+        </h1>
+
+        <div>
+            <button 
+                class="bg-slate-100 border-sky-600 text-sky-600 
+                mt-6 border font-semibold text-lg px-6 py-2 rounded-full 
+                hover:cursor-pointer hover:bg-sky-600 hover:text-slate-50 
+                hover:duration-100 focus:ring-0"
+                id="start-button"
+            >
+                Start
+            </button>
+            <button
+                class="hover:cursor-pointer w-10 h-10 py-1.5 mx-4"
+                id="reset-button"
+            >
+                <img src="/reload.svg" />
+            </button>
+            <button
+                class="hover:cursor-pointer w-18 h-18 py-3.5 mx-1"
+                id="setting-button"
+            >
+                <img src="/setting.svg" />
+            </button>
+        </div>
+    </div>
+
+    <footer class="min-h-7 bg-slate-800/50">
+        <p class="text-sm text-center leading-7">
+            Made by Haven - Find me on <a href="https://github.com/pth3231" class="underline hover:text-slate-300" target="_blank">Github</a>
+        </p>
+    </footer>
+
+    <div 
+        class="w-screen h-screen p-4 bg-slate-800/30 absolute top-0 hidden"
+        id="floating-window"
+    >
+        <div class="max-w-2xl mx-auto px-12 py-16 bg-slate-900/90 mt-16 relative rounded-3xl flex">
+            
+            <button
+                class="hover:cursor-pointer absolute top-6 right-6 text-4xl font-light text-slate-50"
+                id="exit-window"
+            >
+                x
+            </button>
+
+            <div class="flex flex-col">
+                <button 
+                    class="font-bold hover:cursor-pointer flex justify-start my-2 
+                    aria-selected:underline aria-selected:underline-offset-5 tab" 
+                    aria-selected="true"
+                    data-section="general-setting"
+                >
+                    General
+                </button>
+                <button 
+                    class="font-bold hover:cursor-pointer flex justify-start my-2 
+                    aria-selected:underline aria-selected:underline-offset-5 tab"  
+                    aria-selected="false"
+                    data-section="timer-setting"
+                >
+                    Timer
+                </button>
+            </div>
+
+            <div>
+                <div id="general-setting" class="section">
+                    <p class="text-white">General</p>
+                </div>
+                
+                <div id="timer-setting" class="section hidden">
+                    <p class="text-white">Timer</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

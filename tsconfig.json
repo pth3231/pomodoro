@@ -5,7 +5,7 @@
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "outDir": "build",
+    "outDir": "dist",
     "sourceMap": true,
     "strict": true,
     "isolatedModules": true,
@@ -24,6 +24,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["process.env.d.ts", "./**/*.ts"],
+  "include": ["src/**/*.ts", "process.d.ts", "jest.config.ts", "tsconfig.json"],
   "exclude": ["node_modules"]
 }
