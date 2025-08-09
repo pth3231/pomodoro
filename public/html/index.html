@@ -9,7 +9,7 @@
     <title>Home - Pomodoro Manager</title>
     <link rel="stylesheet" href="/output.css">
     <link rel="icon" type="image/svg" href="/icon.svg">
-    <script src="/index.js" defer></script>
+    <script src="/index.js" type="module" defer></script>
 </head>
 <body class="w-screen min-h-screen overflow-hidden bg-cover bg-center bg-[url(/bg-dark-academia.jpg)] text-slate-50 flex flex-col justify-between items-stretch">
     <nav class="w-full mx-auto justify-between items-center">
@@ -18,21 +18,25 @@
                 <img src="/icon.svg" class="h-16 w-16" />
                 <span class="font-bold ml-4">pomodoro</span>
             </a>
-            <a href="/login" class="hover:underline">Login</a>
+            <a href="/login" class="hover:underline font-bold">Login</a>
         </div>
     </nav>
     <div class="container mx-auto flex flex-col items-center justify-center">
+        <div class="grid text-lg font-bold gap-4 grid-cols-3 grid-flow-row" id="mode-display">
+            <span class="text-center aria-selected:bg-sky-600 aria-selected:rounded-2xl" aria-selected="true">Focus</span>
+            <span class="text-center aria-selected:bg-sky-600 aria-selected:rounded-2xl" aria-selected="false">Break</span>
+            <span class="text-center px-2 aria-selected:bg-sky-600 aria-selected:rounded-2xl" aria-selected="false">Long break</span>
+        </div>
         <h1 
             class="text-9xl font-bold text-slate-50 py-8 items-center rounded-full"
             id="timer"
         >
-            ~_~
         </h1>
 
         <div>
             <button 
                 class="bg-slate-100 border-sky-600 text-sky-600 
-                mt-6 border font-semibold text-lg px-6 py-2 rounded-full 
+                mt-6 border-2 font-semibold text-lg px-6 py-2 rounded-full 
                 hover:cursor-pointer hover:bg-sky-600 hover:text-slate-50 
                 hover:duration-100 focus:ring-0"
                 id="start-button"
@@ -90,6 +94,14 @@
                 >
                     Timer
                 </button>
+                <button 
+                    class="font-bold hover:cursor-pointer flex justify-start my-2 
+                    aria-selected:underline aria-selected:underline-offset-5 tab"  
+                    aria-selected="false"
+                    data-section="account-setting"
+                >
+                    Account
+                </button>
             </div>
 
             <div>
@@ -100,10 +112,12 @@
                 <div id="timer-setting" class="section hidden">
                     <p class="text-white">Timer</p>
                 </div>
+
+                <div id="account-setting" class="section hidden">
+                    <p class="text-white">Account</p>
+                </div>
             </div>
-
         </div>
-
     </div>
 </body>
 </html>

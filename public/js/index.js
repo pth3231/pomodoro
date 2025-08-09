@@ -1,22 +1,23 @@
 'use strict';
 
+import { Timer, toHHMMSS } from './libs/timer.js';
+
 const startButton = document.getElementById("start-button");
 const resetButton = document.getElementById("reset-button");
 const settingButton = document.getElementById("setting-button");
 const exitButton = document.getElementById("exit-window");
 
-let timerInterval = null;
+const timerElement = document.getElementById("timer");
 
-function secondsToTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    seconds %= 3600;
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
+// Timer functionality - Start and pause
+const focusTimer = new Timer(
+    timerElement,
+);
 
-    return `${hours > 0 ? hours + ':' : ''}${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-}
-
+// Timer settings - Tab changing functionality
 document.addEventListener("DOMContentLoaded", function() {
+    timerElement.innerText = toHHMMSS(focusTimer.focusDuration);
+
     const tabs = document.querySelectorAll(".tab");
     const sections = document.querySelectorAll(".section");
 
@@ -32,33 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-startButton.addEventListener("click", function(event) {
-    const timer = document.getElementById("timer");
-    let timeLeft = 25 * 60; // 25 minutes in seconds
-    timer.innerText = secondsToTime(timeLeft);
-    timerInterval = setInterval(() => {
-        if (timeLeft <= 0) {
-            clearInterval(this);
-            timer.innerText = "^0^";
-        }
-
-        --timeLeft;
-        timer.innerText = secondsToTime(timeLeft);
-    }, 1000);
-});
-
-resetButton.addEventListener("click", function(event) {
-    if (!timerInterval) {
-        alert("Timer is not running!");
-        return;
-    }
-
-    const timer = document.getElementById("timer");
-    clearInterval(timerInterval);
-    timerInterval = null;
-    timer.innerText = "~_~";
-});
-
 settingButton.addEventListener("click", function(event) {
     const floatingWindow = document.getElementById("floating-window"); 
     floatingWindow.classList.remove("hidden");
@@ -67,4 +41,22 @@ settingButton.addEventListener("click", function(event) {
 exitButton.addEventListener("click", function(event) {
     const floatingWindow = document.getElementById("floating-window");
     floatingWindow.classList.add("hidden");
+});
+
+startButton.addEventListener("click", function(event) {
+    if (focusTimer.isRunning()) {
+        focusTimer.pause();
+        event.target.innerText = "Start";
+        return;
+    }
+
+    focusTimer.start();
+    console.log("Current time left (ms):", focusTimer.timeLeft);
+    event.target.innerText = "Pause";
+});
+
+resetButton.addEventListener("click", function(event) {
+    timerElement.innerText = toHHMMSS(focusTimer.focusDuration);
+    focusTimer.reset('focus');
+    startButton.innerText = "Start";
 });

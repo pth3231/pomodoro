@@ -10,13 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
-    <title>Login</title>
-    <script src="/login.js" type="module" defer></script>
+    <title>Sign up</title>
+    <script src="/signup.js" type="module" defer></script>
 </head>
 
 <body
     class="container mx-auto overflow-hidden bg-cover bg-center bg-[url(/bg-dark-academia.jpg)] flex flex-col items-center justify-center">
-    <form method="POST" action="/api/login"
+    <form method="POST" action="/api/signup"
         class="bg-slate-50/90 w-xl min-h-xl mx-auto p-8 mt-16 rounded-2xl shadow-lg flex flex-col">
         <a href="/" class="flex items-center mx-auto">
             <img src="/icon.svg" class="h-16 w-16" />
@@ -27,13 +27,13 @@
         <label for="password" class="font-semibold mt-2">Password:</label>
         <input class="my-2 py-2 px-4 border rounded-2xl" type="password" id="password" name="password" required />
         <p class="text-sm">
-            Do not have an account?
-            <a href="/signup" class="text-sky-700 hover:underline hover:underline-offset-4">Sign up now!</a>
+            Already have an account? 
+            <a href="/login" class="text-sky-700 hover:underline hover:underline-offset-4">Log in</a>
         </p>
         <button type="submit" class="bg-slate-100 border-sky-600 text-sky-600 
                 mt-6 border font-semibold text-lg px-6 py-2 rounded-full 
                 hover:cursor-pointer hover:bg-sky-600 hover:text-slate-50 
-                hover:duration-100 focus:ring-0">Log in</button>
+                hover:duration-100 focus:ring-0">Sign up</button>
     </form>
 </body>
 

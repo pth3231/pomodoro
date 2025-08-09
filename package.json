@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon -r tsconfig-paths/register --exec tsx ./src/server.ts",
-    "build": "npx tsc && npx tsc-alias",
-    "start": "npx pm2 start ./dist/src/server.js",
+    "build:css": "npx @tailwindcss/cli -i ./public/css/index.css -o ./public/css/output.css",
+    "build:server": "npx tsc && npx tsc-alias",
+    "dev": "npx nodemon --watch src --watch public -r tsconfig-paths/register --exec \"npm run build:css && tsx ./src/server.ts\" ",
+    "start": "npm run build:css && npm run build:server && npx pm2 start",
+    "delete:all": "npx pm2 stop all && npx pm2 delete all",
     "lint": "eslint ./src/**/*.ts --fix",
     "format": "prettier --write ./**/*.{ts,json}",
     "test": "jest --coverage=true -w=1 --forceExit --detectOpenHandles --watchAll=false --testPathPattern=src/__tests__ --testPathIgnorePatterns=dist"
@@ -16,6 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.11",
+    "@types/compression": "^1.8.1",
+    "compression": "^1.8.1",
     "cors": "2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "16.5.0",
