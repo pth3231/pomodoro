@@ -1,6 +1,6 @@
 {
   "name": "pomodoro",
-  "description": "",
+  "description": "A time manager helps users improve productivity and delays procastination.",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,8 @@
     "test": "jest --coverage=true -w=1 --forceExit --detectOpenHandles --watchAll=false --testPathPattern=src/__tests__ --testPathIgnorePatterns=dist"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Haven",
+  "license": "MIT",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.11",
     "@types/compression": "^1.8.1",
