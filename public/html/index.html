@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <title>Home - Pomodoro Manager</title>
-    <link rel="stylesheet" href="/output.css">
     <link rel="icon" type="image/svg" href="/icon.svg">
+    <link rel="stylesheet" href="/output.css">
     <script src="/index.js" type="module" defer></script>
 </head>
 <body class="w-screen min-h-screen overflow-hidden bg-cover bg-center bg-[url(/bg-dark-academia.jpg)] text-slate-50 flex flex-col justify-between items-stretch">
@@ -18,25 +18,25 @@
                 <img src="/icon.svg" class="h-16 w-16" />
                 <span class="font-bold ml-4">pomodoro</span>
             </a>
-            <a href="/login" class="hover:underline font-bold">Login</a>
+            <a href="/login" class="hover:underline font-bold mx-2">Login</a>
         </div>
     </nav>
     <div class="container mx-auto flex flex-col items-center justify-center">
-        <div class="grid text-lg font-bold gap-4 grid-cols-3 grid-flow-row" id="mode-display">
+        <div class="grid text-md md:text-lg font-bold gap md:gap-4 grid-cols-3 grid-flow-row" id="mode-display">
             <span class="text-center aria-selected:bg-sky-600 aria-selected:rounded-2xl" aria-selected="true">Focus</span>
             <span class="text-center aria-selected:bg-sky-600 aria-selected:rounded-2xl" aria-selected="false">Break</span>
             <span class="text-center px-2 aria-selected:bg-sky-600 aria-selected:rounded-2xl" aria-selected="false">Long break</span>
         </div>
         <h1 
-            class="text-9xl font-bold text-slate-50 py-8 items-center rounded-full"
+            class="text-8xl md:text-9xl font-bold text-slate-50 py-8 items-center rounded-full"
             id="timer"
         >
         </h1>
 
-        <div>
+        <div class="flex items-center">
             <button 
                 class="bg-slate-100 border-sky-600 text-sky-600 
-                mt-6 border-2 font-semibold text-lg px-6 py-2 rounded-full 
+                border-2 font-semibold text-lg px-6 py-2 rounded-full 
                 hover:cursor-pointer hover:bg-sky-600 hover:text-slate-50 
                 hover:duration-100 focus:ring-0"
                 id="start-button"
@@ -44,16 +44,16 @@
                 Start
             </button>
             <button
-                class="hover:cursor-pointer w-10 h-10 py-1.5 mx-4"
+                class="hover:cursor-pointer mx-4"
                 id="reset-button"
             >
-                <img src="/reload.svg" />
+                <img src="/reload.svg" class="w-10 h-10" />
             </button>
             <button
-                class="hover:cursor-pointer w-18 h-18 py-3.5 mx-1"
+                class="hover:cursor-pointer "
                 id="setting-button"
             >
-                <img src="/setting.svg" />
+                <img src="/setting.svg" class="w-10 h-10" />
             </button>
         </div>
     </div>

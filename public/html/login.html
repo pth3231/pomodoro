@@ -4,24 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg" href="/icon.svg">
-    <link rel="stylesheet" href="/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
     <title>Login</title>
+    <link rel="icon" type="image/svg" href="/icon.svg">
+    <link rel="stylesheet" href="/output.css">
     <script src="/login.js" type="module" defer></script>
 </head>
 
 <body
     class="container mx-auto overflow-hidden bg-cover bg-center bg-[url(/bg-dark-academia.jpg)] flex flex-col items-center justify-center">
-    <form method="POST" action="/api/login"
-        class="bg-slate-50/90 w-xl min-h-xl mx-auto p-8 mt-16 rounded-2xl shadow-lg flex flex-col">
+    <form method="POST" action="/api/login" id="login-form"
+        class="bg-slate-50/90 w-11/12 md:w-xl min-h-xl mx-auto p-8 mt-16 rounded-2xl shadow-lg flex flex-col">
         <a href="/" class="flex items-center mx-auto">
             <img src="/icon.svg" class="h-16 w-16" />
             <span class="font-bold ml-4">pomodoro</span>
         </a>
+
+        <p id="error-message" class="bg-red-600 border border-red-900 py-1 px-4 rounded-2xl text-slate-50 text-sm font-semibold mt-3">
+        </p>
+
         <label for="username" class="font-semibold mt-2">Username:</label>
         <input class="my-2 py-2 px-4 border rounded-2xl" type="text" id="username" name="username" required />
         <label for="password" class="font-semibold mt-2">Password:</label>

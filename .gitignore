@@ -3,9 +3,6 @@ build/
 dist/
 coverage/
 
-output.min.css
-*.min.js
-
 logs
 *.log
 npm-debug.log*
