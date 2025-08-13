@@ -13,7 +13,7 @@ class Timer {
     * @param {number} delta_time - time interval in milliseconds for the timer (default is 10 ms)
     * 
     * @property {unknown} timer_id
-    * @property {number} timer_left - remaining time in milliseconds
+    * @property {number} time_left - remaining time in milliseconds
     * @property {HTMLElement} ref_to_html_element - reference to the HTML element where the timer will be displayed
     * @property {number} focus_duration - duration of the focus session in milliseconds (default is 25 minutes)
     * @property {number} break_duration - duration of the break in milliseconds (default is 5 minutes)
@@ -28,7 +28,7 @@ class Timer {
     */
 
     timer_id;
-    timer_left;
+    time_left;
     delta_time;
     ref_to_html_element;
 
@@ -49,7 +49,7 @@ class Timer {
     ) {
         this.timer_id = null;
         this.ref_to_html_element = ref_to_html_element;
-        this.timer_left = focus_duration;
+        this.time_left = focus_duration;
         this.focus_duration = focus_duration;
         this.break_duration = break_duration;
         this.longbreak_duration = longbreak_duration;
@@ -69,28 +69,28 @@ class Timer {
         }
 
         this.timer_id = setInterval(() => {
-            this.timer_left -= this.delta_time;
-            this.ref_to_html_element.innerText = toHHMMSS(this.timer_left);
+            this.time_left -= this.delta_time;
+            this.ref_to_html_element.innerText = toHHMMSS(this.time_left);
 
-            if (this.timer_left <= 0) {
+            if (this.time_left <= 0) {
                 this.pause();
-                console.log("Timer finished. Current mode:", this.current_mode);
                 if (this.current_mode === 'focus') {
                     this.current_session++;
                 
                     if (this.current_session % this.sessions_before_long_break === 0) {
                         this.current_mode = 'longbreak';
-                        this.timer_left = this.longbreak_duration;
+                        this.time_left = this.longbreak_duration;
                     } else {
                         this.current_mode = 'break';
-                        this.timer_left = this.break_duration;
+                        this.time_left = this.break_duration;
                     }
                 } else {
                     this.current_mode = 'focus';
-                    this.timer_left = this.focus_duration;
+                    this.time_left = this.focus_duration;
                 }
                 
                 this.updateModeDisplay();
+                console.log("Timer finished. Current mode:", this.current_mode);
                 this.start();
             }
         }, this.delta_time);
@@ -121,16 +121,16 @@ class Timer {
         this.current_mode = 'focus';
         switch (mode) {
             case 'focus':
-                this.timer_left = this.focus_duration;
+                this.time_left = this.focus_duration;
                 break;
             case 'break':
-                this.timer_left = this.break_duration;
+                this.time_left = this.break_duration;
                 break;
             case 'long break':
-                this.timer_left = this.longbreak_duration;
+                this.time_left = this.longbreak_duration;
                 break;
             default:
-                this.timer_left = this.focus_duration;
+                this.time_left = this.focus_duration;
         }
         this.updateModeDisplay();
     }

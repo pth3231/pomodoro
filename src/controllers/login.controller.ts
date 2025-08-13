@@ -1,7 +1,8 @@
-import { type Response, type Request } from 'express';
-import { AccountModel } from "@/models/account.model";
+import { type Response, type Request, type CookieOptions } from 'express';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import { AccountModel } from "@/models/account.model";
+import { generateAccessToken } from '@/libs/auth';
 
 async function validateAccount(req: Request, res: Response) {
     console.log(req.body);
@@ -24,24 +25,39 @@ async function validateAccount(req: Request, res: Response) {
         // Find matched username
         const account = await AccountModel.findOne({ username: parsed_username });
         console.log(account);
+        if (!account) {
+            throw new Error("Credential not exist");
+        }
 
         // Send respond
         const is_matched = await bcrypt.compare(parsed_password, account?.password as string);
-        if (!account || !is_matched) {
+        if (!is_matched) {
             throw new Error("Unmatched credential");
         }
 
         // Redirect to home
-        res.status(200).redirect("/");
+        // TODO: send a cookie containing JWT to the client
+        const token = generateAccessToken(parsed_username);
+            
+        const options: CookieOptions = {
+            httpOnly: true,
+            signed: true,
+            path: "/",
+            maxAge: 10 * 60 * 1000 // 10 mins
+        };
+    
+        res.cookie("jwt", token, options);
+
+        res.sendStatus(200);
     } catch (e) {  
         if (e instanceof Error) {
             console.error(e);
             res.status(401).json({
-                "message": e.message
+                message: e.message
             });
         } else {
             res.status(500).json({
-                "message": "Unexpected error"
+                message: "Unexpected error"
             });
         }
     }

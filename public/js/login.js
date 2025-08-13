@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 login_form_element.addEventListener("submit", async (e) => {
+    e.preventDefault();
     const form = e.target;
     const form_data = new FormData(form);
     const url_encoded_data = new URLSearchParams(form_data);
@@ -24,6 +25,8 @@ login_form_element.addEventListener("submit", async (e) => {
 
             error_message_element.classList.remove("hidden");
             error_message_element.innerText = error_data.message;
+        } else {
+            window.location.assign("/");
         }
     } catch (e) {
         console.error(e);

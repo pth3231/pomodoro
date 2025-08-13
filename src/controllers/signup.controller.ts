@@ -35,7 +35,7 @@ async function registerAccount(req: Request, res: Response) {
         await new_account.save();
 
         console.log("Finished sign up process!");
-        res.status(200).redirect("/login");
+        res.sendStatus(200);
     } catch (e) {        
         if (e instanceof Error) {
             console.error(e);
