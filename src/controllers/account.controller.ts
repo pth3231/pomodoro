@@ -7,6 +7,7 @@ function handleGreet(req: Request, res: Response) {
 }
 
 function getBasicInfo(req: Request, res: Response) {
+    console.log("[account.controller] Forwarded authentication payload: ", req.authPayload);
     res.status(200).json({
         user_info: req.authPayload?.decoded
     });

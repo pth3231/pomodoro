@@ -1,7 +1,7 @@
 import { type Response, type Request } from 'express';
-import { AccountModel } from "@/models/account.model";
-import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import { retrieveAccountFromDatabase } from '@/libs/auth';
+import { AccountModel } from '@/models/account.model';
 
 async function registerAccount(req: Request, res: Response) {
     // Parse body
@@ -17,9 +17,7 @@ async function registerAccount(req: Request, res: Response) {
             throw new Error("Mongoose URI is empty");
         }
 
-        await mongoose.connect(process.env.MONGODB_CONN_URI as string);
-
-        const overlap_account = await AccountModel.findOne({ username: parsed_username });
+        const overlap_account = await retrieveAccountFromDatabase(parsed_username);
         if (overlap_account) {
             throw new Error("Duplicated credentials");
         }

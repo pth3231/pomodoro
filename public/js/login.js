@@ -1,5 +1,6 @@
 const login_form_element = document.getElementById("login-form");
 const error_message_element = document.getElementById("error-message");
+const submit_button_element = document.getElementById("submit-button")
 
 document.addEventListener("DOMContentLoaded", () => {
     error_message_element.classList.add("hidden");
@@ -7,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 login_form_element.addEventListener("submit", async (e) => {
     e.preventDefault();
+    submit_button_element.setAttribute('disabled', 'true');
     const form = e.target;
     const form_data = new FormData(form);
     const url_encoded_data = new URLSearchParams(form_data);
@@ -25,6 +27,7 @@ login_form_element.addEventListener("submit", async (e) => {
 
             error_message_element.classList.remove("hidden");
             error_message_element.innerText = error_data.message;
+            submit_button_element.setAttribute('disabled', 'false');
         } else {
             window.location.assign("/");
         }

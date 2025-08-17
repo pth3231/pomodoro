@@ -1,15 +1,12 @@
 import { type Response, type Request, type CookieOptions } from 'express';
-import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import { AccountModel } from "@/models/account.model";
-import { generateAccessToken } from '@/libs/auth';
+import { generateAccessToken, retrieveAccountFromDatabase } from '@/libs/auth';
 
 async function validateAccount(req: Request, res: Response) {
     console.log(req.body);
     // Parse body
     const parsed_username = req.body.username;
     const parsed_password = req.body.password;
-
     try {
         if (!parsed_username || !parsed_password) {
             throw new Error("Unable to parse body");
@@ -19,12 +16,7 @@ async function validateAccount(req: Request, res: Response) {
             throw new Error("Mongoose URI is empty");
         }
 
-        // Init a connection in the connection pool
-        await mongoose.connect(process.env.MONGODB_CONN_URI as string);
-
-        // Find matched username
-        const account = await AccountModel.findOne({ username: parsed_username });
-        console.log(account);
+        const account = await retrieveAccountFromDatabase(parsed_username);
         if (!account) {
             throw new Error("Credential not exist");
         }
@@ -42,6 +34,7 @@ async function validateAccount(req: Request, res: Response) {
         const options: CookieOptions = {
             httpOnly: true,
             signed: true,
+            sameSite: 'strict',
             path: "/",
             maxAge: 10 * 60 * 1000 // 10 mins
         };
@@ -49,14 +42,14 @@ async function validateAccount(req: Request, res: Response) {
         res.cookie("jwt", token, options);
 
         res.sendStatus(200);
-    } catch (e) {  
+    } catch (e) {
         if (e instanceof Error) {
             console.error(e);
             res.status(401).json({
                 message: e.message
             });
         } else {
-            res.status(500).json({
+            res.status(403).json({
                 message: "Unexpected error"
             });
         }

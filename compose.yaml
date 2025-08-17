@@ -13,8 +13,21 @@ services:
       context: .
     environment:
       NODE_ENV: production
+      MONGODB_CONN_URI: ${MONGODB_CONN_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      COOKIE_SECRET: ${COOKIE_SECRET}
     ports:
       - 8000:8000
+    depends_on:
+      - blacklist
+        
+  blacklist:
+    image: redis:8.2-alpine
+    restart: always
+    ports:
+      - 6379:6379
+  
+
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to

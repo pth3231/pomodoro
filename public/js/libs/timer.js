@@ -31,6 +31,7 @@ class Timer {
     time_left;
     delta_time;
     ref_to_html_element;
+    accumulated_time;
 
     focus_duration;
     break_duration;
@@ -57,6 +58,7 @@ class Timer {
         this.current_session = 0;
         this.current_mode = 'focus';
         this.delta_time = delta_time;
+        this.accumulated_time = 0;
     }
 
     isRunning() {
@@ -70,6 +72,7 @@ class Timer {
 
         this.timer_id = setInterval(() => {
             this.time_left -= this.delta_time;
+            this.accumulated_time += this.delta_time;
             this.ref_to_html_element.innerText = toHHMMSS(this.time_left);
 
             if (this.time_left <= 0) {
